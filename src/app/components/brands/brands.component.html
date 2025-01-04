@@ -1,0 +1,14 @@
+<section class="bg-green-50">
+    <h2 class="subTitle  pt-5">Our Brands
+        <div class="line border-4 border-amber-400 mx-auto w-1/12 mb-10 rounded-full  transition-all duration-1000"></div>
+        </h2>
+    <div  class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div *ngFor="let brand of Brands" class="bg-white p-4 shadow-lg  border-2  border-green-600 rounded-full hover:bg-green-50 cursor-pointer transition-all duration-700 hover:scale-x-90 shadow-green-200 text-center">
+            <div class="mt-4  text-green-600  font-bold">
+                <h2 class="text-xl font-bold">{{brand.name}}</h2>
+            </div>
+        </div>
+
+
+    </div>
+</section>

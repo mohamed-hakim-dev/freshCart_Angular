@@ -1,0 +1,17 @@
+.bgImg{
+  background-image: url('../../../assets/images/main-slider-3.jpeg');
+  background-size: cover;
+  background-position: center;
+  height: 100dvh;
+}
+
+
+input{
+  &::placeholder{
+    color: #b56702eb;
+    background-color: #a5880523;
+    border-radius: 5px;
+    padding-inline: 5px;
+    
+  }
+}

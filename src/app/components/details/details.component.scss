@@ -1,0 +1,41 @@
+/* Custom Styles */
+:root {
+    --primary: #2563eb; /* Tailwind blue */
+    --primary-dark: #1e3a8a;
+    --secondary: #6b7280; /* Tailwind gray */
+  }
+  
+  section {
+    /* Tailwind utilities handle most styles */
+    position: relative;
+  
+    .add-to-cart-btn {
+      @apply bg-gradient-to-r from-blue-500 to-purple-600 text-white;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease-in-out, background 0.3s ease-in-out;
+  
+      &:hover {
+        transform: translateY(-3px) scale(1.05);
+        background: linear-gradient(to right, #1e40af, #9333ea);
+      }
+    }
+  
+    .scrollbar-hide {
+      /* Custom scrollbar removal */
+      scrollbar-width: none; /* For Firefox */
+      -ms-overflow-style: none; /* For Internet Explorer and Edge */
+    }
+  
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none; /* For Chrome, Safari, and Opera */
+    }
+  
+    img {
+      transition: transform 0.3s ease-in-out;
+  
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+

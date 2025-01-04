@@ -1,0 +1,8 @@
+<div class="pb-[70px]">
+<app-blank-nav ></app-blank-nav>
+</div>
+<router-outlet></router-outlet>
+<app-footer></app-footer>
+<button  #ToUp  class="fixed bottom-10 right-2 w-10 h-10 shadow-2xl shadow-black bg-green-500 rounded-full flex justify-center items-center cursor-pointer hover:bg-green-600 transition-all duration-500 opacity-70 " (click)="upToTop(ToUp)">
+    <i class="fa-solid fa-caret-up fa-2xl animate-bounce"></i>
+</button>   

@@ -1,0 +1,76 @@
+<!-- Empty cart -->
+<div *ngIf="cartItems==0||products.length==0">
+    <div class="empty-cart ">
+        <h2 class="mt-10">Your Cart is Empty</h2>
+
+        <div class="flex justify-center items-center mt-8 animate-pulse">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M7 18c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2zM7.16 5.64L6.09 3.39C6.04 3.27 5.94 3.2 5.82 3.2H2v2h3.14l1.38 3.31-.95 2.12c-.1.22-.16.46-.16.7 0 .83.67 1.5 1.5 1.5H19v-2H7.42c-.06 0-.11-.05-.11-.11L7.98 8h10.85c.65 0 1.2-.42 1.41-1.02l2.27-6.01H4.28l2.88 6.67z"/>
+            </svg>
+        </div>
+        <p>Looks like you haven't added anything to your cart yet.</p>
+        <button class="bg-gray-400 border-l-2 border-r-2 border-green-400 rounded-s-3xl rounded-r-3xl  py-2 px-4 hover:scale-105 transition-all font-medium  hover:text-gray-300 " routerLink="/home" >Start Shopping</button>
+      </div>
+</div>
+
+
+<!-- fully cart -->
+<section *ngIf="cartItems > 0 && products.length > 0" class="cart-container p-6 bg-gray-100 rounded-lg shadow-lg">
+    <h2
+    class="mainTXT text-lg mb-14 max-sm:text-6xl max-sm:mb-10 max-lg:text-start"
+  >
+  Your Cart Items
+  </h2>
+    <div class=" border-2    border-green-400  w-20 m-auto   mb-5"></div>
+
+    <div class="flex  justify-center items-center space-x-2 space-y-2">
+        <div class=" shadow-lg  w-40  h-24  bg-green-50 rounded-lg text-center flex justify-center items-center flex-col border-l-2 border-lime-500">
+            <h3 class="text-2xl text-green-600 font-extrabold ">({{cartItems}})</h3>
+            <h3 class="text-gray-600 font-bold">Item Count</h3>
+        </div>
+        <div class=" shadow-lg  w-40  h-24  bg-green-50 rounded-lg text-center flex justify-center items-center flex-col border-r-2 border-lime-500">
+            <h3 class="text-2xl text-green-600 font-extrabold ">{{totalPrice|currency:"E£ "}}</h3>
+            <h3 class="text-gray-600 font-bold">Cart Price</h3>
+        </div>
+    </div>
+    <div class="flex justify-center m-4">
+        <button class="text-red-600 hover:text-white ms-2 border-2 border-red-300 py-1 hover:bg-red-300 transition-all hover:scale-95 px-4 rounded-2xl" (click)="clearCart()">Empty this cart</button>
+    </div>
+
+
+    <div class="cart-items grid gap-4">
+      <div *ngFor="let product of products" class="cart-item flex flex-col sm:flex-row items-center bg-white p-4 rounded-lg shadow-md hover:shadow-sm transition-all hover:bg-green-50 duration-700 hover:scale-100 scale-95 shadow-green-200">
+        <div class="item-image w-24 h-24 sm:w-32 sm:h-32 flex-shrink-0 overflow-hidden rounded-lg border border-gray-200">
+          <img class="w-full h-full object-cover" [src]="product.product.imageCover" [alt]="product.product.title">
+        </div>
+        <div class="item-details flex-grow p-4">
+          <h2 class="text-lg font-semibold text-gray-800 truncate">{{product.product.title}}</h2>
+          <div class="item-stock-price mt-2 flex justify-between items-center">
+            <span class="stock-status text-sm font-medium text-gray-600 ms-4    bg-green-100  rounded-2xl   py-1 px-2">In Stock</span>
+            <div class="bg-slate-50 p-2 inline-block me-64 space-y-2 text-center rounded-2xl shadow-sm ">
+              <div class="pb-2">This item price</div>    
+            <span class="bg-slate-100 rounded-2xl p-2  price text-sm font-semibold text-gray-700">{{product.price | currency:'E£ '}}</span>
+            </div>
+          </div>
+          <div class="item-quantity mt-4 flex items-center gap-2">
+            <button class="quantity-btn w-8 h-8 flex items-center justify-center bg-gray-200 text-gray-600 rounded hover:bg-gray-300 transition" (click)="updateCount(product.product._id,product.count-1)">-</button>
+            <span class="text-sm font-extrabold text-gray-700">{{product.count}}</span>
+            <button class="quantity-btn w-8 h-8 flex items-center justify-center bg-gray-200 text-gray-600 rounded hover:bg-gray-300 transition" (click)="updateCount(product.product._id,product.count+1)">+</button>
+             <button class="text-red-600 hover:text-white  ms-2   border-2 border-red-300 py-1 hover:bg-red-300 transition-all hover:scale-95  px-4 rounded-2xl" (click)="removeItem(product.product._id)">Delete</button>
+          </div>
+        </div>
+        <div class="item-brand w-16 h-16 flex-shrink-0 flex items-center justify-center rounded-full overflow-hidden border border-gray-200 bg-gray-50">
+          <img class="w-full h-full object-contain" [src]="product.product.brand.image" [alt]="product.product.brand.name">
+        </div>
+        <div class="item-price mt-4 sm:mt-0 sm:ml-4 ">
+            <h3 class="font-semibold">Item Total Price : </h3>
+          <h4 class="text-4xl text-green-600    text font-bold"> {{(product.price*product.count)|currency:"E£ " }}</h4>
+        </div>
+      </div>
+      <div class="btns flex justify-between py-2 w-1/2 m-auto">
+      <button class="bg-green-600 py-2 px-4 hover:scale-105 duration-500  text-lg    hover:text-black text-white  transition-all rounded-xl shadow-lg  m-auto  font-medium "><i class="fa-solid fa-credit-card px-1"></i> Proceed to Checkout</button>
+      <button class=" border-2 border-gray-300 border-shadow-xl text-green-700 shadow-3xl  py-2 px-4 hover:scale-105 duration-500  text-lg    hover:text-black  transition-all rounded-xl  m-auto  font-medium " routerLink="/home"><i class="fa-solid fa-cart-shopping px-1"></i> Continue Shopping</button>
+      </div>
+    </div>
+  </section>
+  

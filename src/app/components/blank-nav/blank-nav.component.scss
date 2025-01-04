@@ -1,0 +1,22 @@
+$main-transition: 1.5s ease-in-out;
+
+
+.navbar{
+    .social{
+        overflow: hidden;
+        ul{
+            transform: translateY(-1000%);
+            opacity: 0;
+            transition: $main-transition all;
+            transition-duration: 1s;
+        }
+    }
+    &:hover{
+        .social{
+            ul{
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    }
+}

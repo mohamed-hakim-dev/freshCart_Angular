@@ -1,0 +1,101 @@
+<app-login-nav></app-login-nav>
+<!--login form -->
+<form [formGroup]="loginForm" (ngSubmit)="login()" class="bgImg py-1">
+  <div
+    class="inputs w-1/4 max-sm:w-full max-sm:mx-auto max-md:w-3/4 max-lg:w-3/4 mr-auto mt-40 ml-32 rounded-3xl p-10 hover:shadow-2xl hover:shadow-amber-600 transition-all duration-300 hover:scale-95"
+  >
+    <h2
+      class="mainTXT text-lg mb-14 max-sm:text-6xl max-sm:mb-10 max-lg:text-start"
+    >
+      login now
+    </h2>
+    <input
+      type="email"
+      id="email"
+      formControlName="email"
+      placeholder="example@gmail.com..."
+      class="text-gray-500 text-sm p-1 px-2 rounded-xl w-full focus:outline-amber-300 focus:shadow-md transition-all hover:shadow-green-200 hover:shadow-sm my-2"
+    />
+    <div
+      class="text-center"
+      *ngIf="
+        (loginForm.get('email')?.touched ||
+          loginForm.get('email')?.value.length > 0) &&
+        loginForm.get('email')?.errors
+      "
+    >
+      <p
+        class="alert bg-amber-600 text-orange-200 rounded-b-full w-3/4 mx-auto font-light text- text-sm"
+        *ngIf="loginForm.get('email')?.getError('required')"
+      >
+        Your email's required
+      </p>
+      <p
+        class="alert bg-amber-600 text-orange-200 rounded-b-full w-3/4 mx-auto font-light text- text-sm"
+        *ngIf="loginForm.get('email')?.getError('email')"
+      >
+        this email is not valid
+      </p>
+    </div>
+    <input
+      type="password"
+      id="password"
+      formControlName="password"
+      placeholder="*******"
+      class="text-gray-500 text-sm p-1 px-2 rounded-xl w-full focus:outline-amber-300 focus:shadow-md transition-all hover:shadow-green-200 hover:shadow-sm my-2"
+    />
+    <div
+      class="text-center"
+      *ngIf="
+        (loginForm.get('password')?.touched ||
+          loginForm.get('password')?.value.length > 0) &&
+        loginForm.get('password')?.errors
+      "
+    >
+      <p
+        class="alert bg-amber-600 text-orange-200 rounded-b-full w-3/4 mx-auto font-light text- text-sm"
+        *ngIf="loginForm.get('password')?.getError('required')"
+      >
+        Your password's required
+      </p>
+    </div>
+    <button
+      type="submit"
+      class="bg-amber-500 text-orange-200 font-semibold rounded-lg p-1 px-2 mt-2 hover:bg-amber-600 hover:scale-105 transition-all duration-300 focus:outline-none disabled:not-allowed disabled:bg-orange-200 disabled:hover:scale-100 disabled:text-orange-50"
+      [disabled]="loginForm.invalid"
+    >
+      Login
+      <span *ngIf="isLoading"><i class="fa-solid fa-spinner fa-spin"></i></span>
+    </button>
+    <p
+      class="bg-amber-600 text-amber-200 rounded-full w-1/2 mx-auto font-extrabold text-sm text-center p-2 animate-pulse disabled:"
+      *ngIf="errMsg"
+    >
+      {{ errMsg }}
+    </p>
+    <a
+      routerLink="/forget-password"
+      class="text-amber-500 font-medium text-sm text-center block hover:underline mt-1 transition-all duration-300"
+      >forget password?</a
+    >
+  </div>
+  <div class="mt-16 ml-5">
+    <button
+      class="bg-white bg-opacity-30 px-2 py-1 hover:bg-opacity-55 transition-all duration-700 hover:scale-95 font-bold text-orange-400 rounded-3xl outline-none"
+      routerLink="/register"
+    >
+      Create account
+      <svg
+        fill="none"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        class="w-4 h-4 ml-1 animate-ping"
+        viewBox="0 0 24 24"
+      >
+        <path d="M5 12h14M12 5l7 7-7 7"></path>
+      </svg>
+    </button>
+  </div>
+</form>
