@@ -1,8 +1,15 @@
 <div class="pb-[70px]">
-<app-blank-nav ></app-blank-nav>
+<app-blank-nav></app-blank-nav>
 </div>
 <router-outlet></router-outlet>
 <app-footer></app-footer>
-<button  #ToUp  class="fixed bottom-10 right-2 w-10 h-10 shadow-2xl shadow-black bg-green-500 rounded-full flex justify-center items-center cursor-pointer hover:bg-green-600 transition-all duration-500 opacity-70 " (click)="upToTop(ToUp)">
-    <i class="fa-solid fa-caret-up fa-2xl animate-bounce"></i>
-</button>   
+<div #ToUpRef class="hidden">
+    <button  (click)="toUp()"    class="fixed bottom-10 right-2 w-10 h-10 shadow-2xl shadow-black bg-green-500 rounded-full flex justify-center items-center cursor-pointer hover:bg-green-400 transition-all duration-500 opacity-80" >
+        <i class="fa-solid fa-caret-up fa-2xl animate-bounce"></i>
+    </button>
+</div>
+
+<div [ngClass]="{'fa-shake':num>0}"   class="fav bg-red-300 w-14 h-16 fixed top-1/2 -left-11 focus:outline-none   hover:animate-none  cursor-pointer  z-50 rounded-2xl flex justify-center items-center  hover:left-0 transition-all duration-500" routerLink="/wishlist">
+    <i class="fa-solid fa-heart fa-2x text-red-100 relative fa-beat "></i>
+    <span class="w-5 h-5 absolute text-center flex justify-center items-center text-red-300 font-extrabold">{{num}}</span>
+</div>

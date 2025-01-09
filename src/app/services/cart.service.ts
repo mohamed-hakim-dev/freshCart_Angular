@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -37,4 +37,5 @@ export class CartService {
   {
     return this._HttpClient.delete(`https://ecommerce.routemisr.com/api/v1/cart`)
   }
+  cartItem:BehaviorSubject<number>=new BehaviorSubject(0);
 }

@@ -1,0 +1,27 @@
+<section class=" container mx-auto">
+    <div class="grid xl:grid-cols-6 xl:gap-x-4 xl:gap-6 lg:grid-cols-5 max-sm:grid-cols-3 sm:gap-3 max-md:grid-cols-3 max-md:gap-5 max-lg:grid-cols-4 md:gap-4 transition-all">
+        <div class=" product-card card overflow-hidden rounded-xl p-2 shadow-lg border border-green-200 transition-transform transform hover:scale-105 hover:shadow-green-300 hover:bg-green-50" *ngFor="let product of wishlistData">
+            <div role="button" [routerLink]="['/details', product._id]" >
+                <div class="scale-110 transition-transform duration-300 ease-in-out  ">
+                    <img [src]="product.imageCover" [alt]="product.title" class="w-full h-48 object-cover rounded-xl transition-transform duration-300 ease-in-out">
+                </div>
+                <h2 class="max-sm:pt-7 text-light text-center text-sm text-gray-600 pt-8">{{product.title | cutText:2}}</h2>
+                <div class="flex justify-between items-center p-2 max-sm:text-xs">
+                    <span class="text-green-700 font-semibold">Price: {{product.price | currency:'E£'}}</span>
+                    <span class="flex justify-between">
+                        <i [class.text-yellow-400]="product.ratingsAverage >= stars" class="fa-solid fa-star text-sm animate-pulse" *ngFor="let stars of [1,2,3,4,5]"></i>
+                    </span>
+                </div>
+            </div>
+            <button   (click)="toCart(product._id)" class="addBtn   bg-green-600 text-white w-full rounded-lg hover:bg-green-500 flex items-center justify-center py-1" >
+                Add to Cart <i class="fa-solid fa-cart-shopping text-white ml-2"></i>
+            </button>
+            <div  *ngIf="!wishData.includes(product._id)"  class="addFav absolute top-2 right-2 " role="button" (click)="addWish(product._id)" > 
+                <i class="fa-regular fa-heart text-green-700 text-2xl empty"></i>
+            </div>
+            <div *ngIf="wishData.includes(product._id)"  class="remFav absolute top-2 right-2  fa-beat"  role="button" (click)="removeWish(product._id)"> 
+                <i class="fa-solid fa-heart text-green-700 text-2xl fully" ></i>
+            </div>
+        </div>
+    </div>
+</section>

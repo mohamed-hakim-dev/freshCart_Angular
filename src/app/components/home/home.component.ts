@@ -1,5 +1,5 @@
 import { CategoriesService } from './../../services/categories.service';
-import { Component, OnInit, AfterViewInit  } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Renderer2  } from '@angular/core';
 import { HomeService } from '../../services/home.service';
 import { CommonModule } from '@angular/common';
 import { CutTextPipe } from '../../pipes/cut-text.pipe';
@@ -9,6 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 import { SearchPipe } from '../../pipes/search.pipe';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { WishlistService } from '../../services/wishlist.service';
 
 
 
@@ -19,25 +20,47 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit{
-  constructor(private homeService:HomeService,private _CartService:CartService,private _ToastrService:ToastrService,private _CategoriesService:CategoriesService){}
+  constructor(private homeService:HomeService,private _CartService:CartService,private _ToastrService:ToastrService,private _CategoriesService:CategoriesService,private _WishlistService:WishlistService,private _Renderer2:Renderer2){}
   catData:any[]=[];
-  
+  wishData:string[]=[];
+// wishlist
+// adding
+addWish(ID:string):void
+{
+  this._WishlistService.addTOWIsh(ID).subscribe({
+    next:(res)=>{
+      if(res.status=='success')
+      {
+        this._ToastrService.success(res.message);
+        this.wishData=res.data;
+        this._WishlistService.wishItems.next(res.data.length);
+      }
+    }
+  })
+}
+// removing
+removeWish(ID:string):void
+{
+  this._WishlistService.removeFromWish(ID).subscribe({
+    next:(res)=>{
+      this._ToastrService.success(res.message)
+      this.wishData=res.data;
+      this._WishlistService.wishItems.next(res.data.length);
+
+    }
+  })
+}
   // searching
   search():string
   {
     return this.homeService.searchTerm;
   }
-  xo()
-  {
-    console.log('favorite test success');
-    
-  }
   products:any[]=[];
+  newData:any;
   ngOnInit(): void {
     this.homeService.getHomeData().subscribe({
       next:({data})=>{
         this.products=data;
-        // console.log(data);
       },
       error:(err)=>{
         console.log(err);
@@ -50,6 +73,16 @@ export class HomeComponent implements OnInit{
         console.log(this.catData);
       }
     })
+
+    this._WishlistService.loggedWish().subscribe({
+      next:(res)=>{
+        this.newData= res.data.map((item:any)=>item._id)
+        this.wishData=this.newData;
+        this._WishlistService.wishItems.next(res.data.length);
+      }
+    })
+
+
   }
 
   toCart(prodID:string):void
@@ -59,14 +92,12 @@ export class HomeComponent implements OnInit{
         this._ToastrService.success(message)
         console.log(message);
         console.log(data);
-        
+        this._CartService.cartItem.next(numOfCartItems);
       }
     })
   }
 
-  trackByFn(index: number, item: any): any {
-    return index; 
-  }
+
 // owl carousel options
   customOptions: OwlOptions = {
 
@@ -121,10 +152,10 @@ customOptions2: OwlOptions = {
   navText: ['', ''],
   responsive: {
     0: {
-      items: 6
+      items: 2
     },
     400: {
-      items: 6
+      items: 3
     },
     740: {
       items: 6

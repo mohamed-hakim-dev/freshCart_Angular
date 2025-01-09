@@ -1,14 +1,14 @@
 <!-- Empty cart -->
 <div *ngIf="cartItems==0||products.length==0">
     <div class="empty-cart ">
-        <h2 class="mt-10">Your Cart is Empty</h2>
+        <h2 class="mt-10 font-extrabold">Your Cart is Empty</h2>
 
-        <div class="flex justify-center items-center mt-8 animate-pulse">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+        <div class="flex justify-center items-center mt-8 animate-pulse text-8xl py-5">🛒
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M7 18c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2zM7.16 5.64L6.09 3.39C6.04 3.27 5.94 3.2 5.82 3.2H2v2h3.14l1.38 3.31-.95 2.12c-.1.22-.16.46-.16.7 0 .83.67 1.5 1.5 1.5H19v-2H7.42c-.06 0-.11-.05-.11-.11L7.98 8h10.85c.65 0 1.2-.42 1.41-1.02l2.27-6.01H4.28l2.88 6.67z"/>
-            </svg>
+            </svg> -->
         </div>
-        <p>Looks like you haven't added anything to your cart yet.</p>
+        <p class="text-gray-500">Looks like you haven't added anything to your cart yet.</p>
         <button class="bg-gray-400 border-l-2 border-r-2 border-green-400 rounded-s-3xl rounded-r-3xl  py-2 px-4 hover:scale-105 transition-all font-medium  hover:text-gray-300 " routerLink="/home" >Start Shopping</button>
       </div>
 </div>
@@ -36,7 +36,6 @@
     <div class="flex justify-center m-4">
         <button class="text-red-600 hover:text-white ms-2 border-2 border-red-300 py-1 hover:bg-red-300 transition-all hover:scale-95 px-4 rounded-2xl" (click)="clearCart()">Empty this cart</button>
     </div>
-
 
     <div class="cart-items grid gap-4">
       <div *ngFor="let product of products" class="cart-item flex flex-col sm:flex-row items-center bg-white p-4 rounded-lg shadow-md hover:shadow-sm transition-all hover:bg-green-50 duration-700 hover:scale-100 scale-95 shadow-green-200">
@@ -68,7 +67,7 @@
         </div>
       </div>
       <div class="btns flex justify-between py-2 w-1/2 m-auto">
-      <button class="bg-green-600 py-2 px-4 hover:scale-105 duration-500  text-lg    hover:text-black text-white  transition-all rounded-xl shadow-lg  m-auto  font-medium "><i class="fa-solid fa-credit-card px-1"></i> Proceed to Checkout</button>
+      <button class="bg-green-600 py-2 px-4 hover:scale-105 duration-500  text-lg hover:text-black text-white  transition-all rounded-xl shadow-lg  m-auto  font-medium "  [routerLink]="['/payment',cartID]" ><i class="fa-solid fa-credit-card px-1"></i> Proceed to Checkout</button>
       <button class=" border-2 border-gray-300 border-shadow-xl text-green-700 shadow-3xl  py-2 px-4 hover:scale-105 duration-500  text-lg    hover:text-black  transition-all rounded-xl  m-auto  font-medium " routerLink="/home"><i class="fa-solid fa-cart-shopping px-1"></i> Continue Shopping</button>
       </div>
     </div>

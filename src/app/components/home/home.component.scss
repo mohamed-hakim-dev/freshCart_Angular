@@ -1,10 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@100;200;300;400;500;600;700;800;900&family=Jersey+15&display=swap');
 .card{
-    .fav{
+  .addFav{
+    transform: translateX(50px);
+  }
+  &:hover{
+    .addFav{
         z-index: 3;
-        transform: translateX(50px);
+        transform: translateX(2px);
         transition: all .3s ease-in-out;
 }
+  }
     .addBtn{
         transform: translateY(80px);
         scale: .5;
@@ -23,10 +28,7 @@
             transition: all .9s ease-in-out;
             z-index: 0 !important;
         }
-        .fav{
-                z-index: 3;
-                transform: translateX(0px);
-        }
+
     }
 
 }
