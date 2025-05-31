@@ -1,6 +1,40 @@
-# FreshCart
+# 🛒 FreshCart
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.2.
+**FreshCart** is a modern, fully responsive e-commerce website built with **Angular** and styled using **TailwindCSS**. It features **lazy loading** for performance optimization and **Stripe** integration for secure payments.
+
+> This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.2.
+
+---
+
+## 🚀 Features
+
+- ⚡ Built with Angular 19 (latest version)
+- 🎨 Responsive and clean UI using TailwindCSS
+- 🧠 Lazy loading for optimized route/module loading
+- 💳 Stripe integration for secure online payments
+- 🔐 User authentication and route protection
+- 🛍️ Shopping cart with add/remove/update functionality
+- 🔎 Product listing with filters and search
+- 🧱 Scalable and modular folder structure
+
+---
+
+## 🛠️ Getting Started
+
+### Prerequisites
+
+Make sure you have the following installed:
+
+- [Node.js](https://nodejs.org/) (v18+ recommended)
+- [Angular CLI](https://angular.io/cli)
+
+### Installation
+
+```bash
+git clone https://github.com/your-username/freshcart.git
+cd freshcart
+npm install
+
 
 ## Development server
 
